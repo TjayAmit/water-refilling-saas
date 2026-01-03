@@ -26,6 +26,8 @@ class OwnerPanelProvider extends PanelProvider
         return $panel
             ->id('owner')
             ->path('owner')
+            ->login()
+            ->homeUrl('/owner')
             ->colors([
                 'primary' => Color::Amber,
             ])

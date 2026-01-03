@@ -29,5 +29,11 @@ class RoleAndPermissionSeeder extends Seeder
             $p = Permission::create(['name' => $permission]);
             $super_admin->givePermissionTo($p);
         }
+
+        $onwer = Role::create(['name' => 'owner']);
+
+        $permission = Permission::create(['name' => 'manage_own_settings']);
+
+        $onwer->givePermissionTo($permission);
     }
 }

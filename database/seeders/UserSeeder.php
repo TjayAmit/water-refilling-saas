@@ -20,5 +20,13 @@ class UserSeeder extends Seeder
         ]);
 
         $super_admin->assignRole('super_admin');
+
+        $owner = User::create([
+            'name' => 'Owner',
+            'email' => 'owner@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $owner->assignRole('owner');
     }
 }
