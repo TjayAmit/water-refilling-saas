@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('delivery_zones', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('station_id')->constrained()->onDelete('cascade');
+            $table->string('type');
+            $table->decimal('radius_km', 8, 2)->nullable();
+            $table->json('polygon')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

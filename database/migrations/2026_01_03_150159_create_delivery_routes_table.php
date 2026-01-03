@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('delivery_routes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('station_id')->constrained('stations')->onDelete('cascade');
+            $table->date('route_date');
+            $table->json('optimized_data');
+            $table->decimal('total_distance_km', 10, 2);
             $table->timestamps();
         });
     }

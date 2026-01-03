@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('station_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('phone');
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
+            $table->boolean('is_trusted')->default(false);
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

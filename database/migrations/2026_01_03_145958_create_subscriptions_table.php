@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('station_id')->constrained()->onDelete('cascade');
+            $table->foreignId('plan_id')->constrained()->onDelete('cascade');
+            $table->timestamp('starts_at');
+            $table->timestamp('ends_at');
+            $table->string('status');
+            $table->timestamp('last_payment_at')->nullable();
             $table->timestamps();
         });
     }

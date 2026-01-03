@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('station_users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('station_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('role');
+            $table->string('phone');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
