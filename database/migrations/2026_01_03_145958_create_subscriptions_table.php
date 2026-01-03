@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('station_id')->constrained()->onDelete('cascade');
-            $table->foreignId('plan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('station_id')->constrained('stations')->onDelete('cascade');
+            $table->foreignId('plan_id')->constrained('subscription_plans')->onDelete('cascade');
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
             $table->string('status');
