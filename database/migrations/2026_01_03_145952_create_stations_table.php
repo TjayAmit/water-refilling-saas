@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->enum('status', ['active', 'suspended'])->default('active');
-            $table->foreignId('subscription_plan_id')->constrained();
             $table->timestamps();
         });
     }

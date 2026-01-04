@@ -19,7 +19,6 @@ class Station extends Model
         'latitude',
         'longitude',
         'status',
-        'subscription_plan_id',
     ];
 
     protected $casts = [
@@ -32,13 +31,13 @@ class Station extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function subscriptionPlan(): BelongsTo
-    {
-        return $this->belongsTo(SubscriptionPlan::class);
-    }
-
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
     }
 }

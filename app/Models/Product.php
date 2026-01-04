@@ -15,6 +15,7 @@ class Product extends Model
         'station_id',
         'name',
         'price',
+        'image',
         'is_active',
     ];
 
