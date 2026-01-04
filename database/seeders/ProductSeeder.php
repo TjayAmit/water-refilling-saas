@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\Station;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -13,27 +12,24 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $station = Station::first();
-
-        if (!$station) {
-            $this->command->warn('No station found. Please create a station first.');
-            return;
-        }
-
         Product::create([
-            'station_id' => $station->id,
-            'name' => 'Round Container',
-            'price' => 25,
+            'name' => 'Mineral Round Container',
             'image' => 'products/rectangle-container.jpg',
-            'is_active' => true,
         ]);
 
         Product::create([
-            'station_id' => $station->id,
-            'name' => 'Rectangle Container',
-            'price' => 30,
+            'name' => 'Purify Round Container',
+            'image' => 'products/rectangle-container.jpg',
+        ]);
+
+        Product::create([
+            'name' => 'Mineral Rectangle Container',
             'image' => 'products/round-container.png',
-            'is_active' => true,
+        ]);
+
+        Product::create([
+            'name' => 'Purify Rectangle Container',
+            'image' => 'products/round-container.png',
         ]);
     }
 }

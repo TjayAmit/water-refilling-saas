@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Station;
+use App\Models\StationProduct;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -30,6 +31,24 @@ class StationSeeder extends Seeder
             'ends_at' => now()->addDays(30),
             'status' => 'paid',
             'last_payment_at' => null,
+        ]);
+
+        StationProduct::create([
+            'station_id' => $station->id,
+            'product_id' => 1,
+            'price' => 30.00,
+            'is_active' => true,
+            'quantity' => 0,
+            'has_stock_limit' => false,
+        ]);
+
+        StationProduct::create([
+            'station_id' => $station->id,
+            'product_id' => 3,
+            'price' => 30.00,
+            'is_active' => true,
+            'quantity' => 0,
+            'has_stock_limit' => false,
         ]);
     }
 }

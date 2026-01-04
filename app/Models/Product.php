@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -12,20 +13,12 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'station_id',
         'name',
-        'price',
         'image',
-        'is_active',
     ];
 
-    protected $casts = [
-        'price' => 'decimal:2',
-        'is_active' => 'boolean',
-    ];
-
-    public function station(): BelongsTo
+    public function stationProducts(): HasMany
     {
-        return $this->belongsTo(Station::class);
+        return $this->hasMany(StationProduct::class);
     }
 }

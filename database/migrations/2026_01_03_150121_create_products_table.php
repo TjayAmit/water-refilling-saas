@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('station_id');
             $table->string('name');
-            $table->decimal('price', 10, 2);
             $table->text('image')->nullable();
-            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
