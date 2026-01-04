@@ -22,7 +22,7 @@ class AuditLogResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
 
-    protected static string | UnitEnum | null $navigationGroup = 'Business Management';
+    protected static string | UnitEnum | null $navigationGroup = 'System Management';
 
     protected static ?string $recordTitleAttribute = 'audit-logs';
 

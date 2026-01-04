@@ -7,7 +7,7 @@ use App\Filament\Owner\Resources\Products\Pages\EditProduct;
 use App\Filament\Owner\Resources\Products\Pages\ListProducts;
 use App\Filament\Owner\Resources\Products\Schemas\ProductForm;
 use App\Filament\Owner\Resources\Products\Tables\ProductsTable;
-use App\Models\Product;
+use App\Models\StationProduct;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,12 +17,13 @@ use UnitEnum;
 
 class ProductResource extends Resource
 {
-    protected static ?string $model = Product::class;
+    protected static ?string $model = StationProduct::class;
+    protected static ?string $navigationLabel = 'Products';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
     protected static string | UnitEnum | null $navigationGroup = 'Business Management';
 
-    protected static ?string $recordTitleAttribute = 'products';
+    protected static ?string $recordTitleAttribute = 'station_products';
 
     public static function form(Schema $schema): Schema
     {
