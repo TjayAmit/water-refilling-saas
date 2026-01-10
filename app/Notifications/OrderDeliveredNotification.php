@@ -4,13 +4,13 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OutForDeliveryNotification extends Notification
+class OrderDeliveredNotification extends Notification
 {
     use Queueable;
-
     protected Order $order;
 
     /**
@@ -37,9 +37,9 @@ class OutForDeliveryNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("Your order {$this->order->order_number} is out for delivery")
-            ->action('Notification Action', url("/orders/{$this->order->id}"))
-            ->line('Please prepare exact amount of water as stated in the order');
+            ->line("Your order {$this->order->order_number} is delivered")
+            ->action('Notification Action', url('/orders/' . $this->order->id . '?tab=delivered'))
+            ->line("Thank you for trusting our service.");
     }
 
     /**
@@ -53,7 +53,7 @@ class OutForDeliveryNotification extends Notification
             'order_id' => $this->order->id,
             'order_number' => $this->order->order_number,
             'total_amount' => $this->order->total_amount,
-            'message' => 'Order out for delivery.'
+            'message' => 'Order Completed'
         ];
     }
 }

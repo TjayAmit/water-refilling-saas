@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
+use App\Notifications\OrderPlaceNotification;
+use App\Services\OrderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct(
+        protected OrderService $service
+    ){}
     /**
      * Display a listing of the resource.
      */
@@ -15,51 +22,23 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        // Render the view
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function placeOrder(Order $order, Request $request): JsonResponse
     {
-        //
+        return response()->json(['data' => $this->service->updateOrderStatus($order, OrderStatusEnum::PENDING, OrderPlaceNotification::class)]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
+    public function placeOutForDelivery(Order $order, Request $request): JsonResponse
     {
-        //
+        return response()->json(['data' => $this->service->updateOrderStatus($order, OrderStatusEnum::OUT_FOR_DELIVERY, OrderPlaceNotification::class)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
+    public function setDelivered(Order $order, Request $request): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        return response()->json(['data' => $this->service->updateOrderStatus($order, OrderStatusEnum::DELIVERED, OrderPlaceNotification::class)]);
     }
 }
