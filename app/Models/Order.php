@@ -7,14 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Database\Factories\OrderFactory;
+use App\Enums\OrderStatusEnum;
+
 class Order extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrderFactory> */
+    /** @use HasFactory<OrderFactory> */
     use HasFactory;
 
     protected $fillable = [
         'station_id',
         'customer_id',
+        'order_number',
         'order_date',
         'total_amount',
         'payment_method',
@@ -26,6 +30,7 @@ class Order extends Model
         'order_date' => 'date',
         'delivery_date' => 'date',
         'total_amount' => 'decimal:2',
+        'status' => OrderStatusEnum::class
     ];
 
     public function station(): BelongsTo

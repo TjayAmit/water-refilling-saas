@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property integer id
+ */
 class Station extends Model
 {
     /** @use HasFactory<\Database\Factories\StationFactory> */
