@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\StationBusinessManagement;
 
-use App\Models\StationProduct;
+use App\Http\Controllers\Controller;
+use App\Models\StationUser;
 use Illuminate\Http\Request;
 
-class StationProductController extends Controller
+class StationUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class StationProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StationProduct $stationProduct)
+    public function show(StationUser $stationUser)
     {
         //
     }
@@ -42,7 +43,7 @@ class StationProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StationProduct $stationProduct)
+    public function edit(StationUser $stationUser)
     {
         //
     }
@@ -50,7 +51,7 @@ class StationProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StationProduct $stationProduct)
+    public function update(Request $request, StationUser $stationUser)
     {
         //
     }
@@ -58,7 +59,7 @@ class StationProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StationProduct $stationProduct)
+    public function destroy(StationUser $stationUser)
     {
         //
     }

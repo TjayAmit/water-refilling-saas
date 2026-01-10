@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RestApis;
 
 use App\Enums\OrderStatusEnum;
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Notifications\OrderPlaceNotification;
 use App\Services\OrderService;
@@ -14,6 +15,7 @@ class OrderController extends Controller
     public function __construct(
         protected OrderService $service
     ){}
+
     /**
      * Display a listing of the resource.
      */
@@ -25,6 +27,11 @@ class OrderController extends Controller
     public function create()
     {
         // Render the view
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        return response()->json(['data' => $this->service->createDraftOrder($request)], 201);
     }
 
     public function placeOrder(Order $order, Request $request): JsonResponse

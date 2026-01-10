@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\Delivery;
+use App\Http\Controllers\Controller;
+use App\Models\DeliveryRoute;
 use Illuminate\Http\Request;
 
-class DeliveryController extends Controller
+class DeliveryRouteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Delivery $delivery)
+    public function show(DeliveryRoute $deliveryRoute)
     {
         //
     }
@@ -42,7 +43,7 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Delivery $delivery)
+    public function edit(DeliveryRoute $deliveryRoute)
     {
         //
     }
@@ -50,7 +51,7 @@ class DeliveryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Delivery $delivery)
+    public function update(Request $request, DeliveryRoute $deliveryRoute)
     {
         //
     }
@@ -58,7 +59,7 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Delivery $delivery)
+    public function destroy(DeliveryRoute $deliveryRoute)
     {
         //
     }

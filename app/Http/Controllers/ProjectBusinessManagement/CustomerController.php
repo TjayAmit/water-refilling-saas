@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\DailyStat;
+use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class DailyStatController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class DailyStatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DailyStat $dailyStat)
+    public function show(Customer $customer)
     {
         //
     }
@@ -42,7 +43,7 @@ class DailyStatController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DailyStat $dailyStat)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -50,7 +51,7 @@ class DailyStatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DailyStat $dailyStat)
+    public function update(Request $request, Customer $customer)
     {
         //
     }
@@ -58,7 +59,7 @@ class DailyStatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DailyStat $dailyStat)
+    public function destroy(Customer $customer)
     {
         //
     }

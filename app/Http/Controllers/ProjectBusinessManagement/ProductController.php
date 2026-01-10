@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\AuditLog;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class AuditLogController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class AuditLogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AuditLog $auditLog)
+    public function show(Product $product)
     {
         //
     }
@@ -42,7 +43,7 @@ class AuditLogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AuditLog $auditLog)
+    public function edit(Product $product)
     {
         //
     }
@@ -50,7 +51,7 @@ class AuditLogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AuditLog $auditLog)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -58,7 +59,7 @@ class AuditLogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AuditLog $auditLog)
+    public function destroy(Product $product)
     {
         //
     }

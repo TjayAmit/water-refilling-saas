@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\Subscription;
+use App\Http\Controllers\Controller;
+use App\Models\SubscriptionPlan;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller
+class SubscriptionPlanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class SubscriptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Subscription $subscription)
+    public function show(SubscriptionPlan $subscriptionPlan)
     {
         //
     }
@@ -42,7 +43,7 @@ class SubscriptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subscription $subscription)
+    public function edit(SubscriptionPlan $subscriptionPlan)
     {
         //
     }
@@ -50,7 +51,7 @@ class SubscriptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subscription $subscription)
+    public function update(Request $request, SubscriptionPlan $subscriptionPlan)
     {
         //
     }
@@ -58,7 +59,7 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subscription $subscription)
+    public function destroy(SubscriptionPlan $subscriptionPlan)
     {
         //
     }

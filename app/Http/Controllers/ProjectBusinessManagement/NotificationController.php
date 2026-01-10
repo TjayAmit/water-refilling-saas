@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\OrderItem;
+use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class OrderItemController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class OrderItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrderItem $orderItem)
+    public function show(Notification $notification)
     {
         //
     }
@@ -42,7 +43,7 @@ class OrderItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OrderItem $orderItem)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -50,7 +51,7 @@ class OrderItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrderItem $orderItem)
+    public function update(Request $request, Notification $notification)
     {
         //
     }
@@ -58,7 +59,7 @@ class OrderItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderItem $orderItem)
+    public function destroy(Notification $notification)
     {
         //
     }

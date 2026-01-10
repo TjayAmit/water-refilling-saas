@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\DeliveryRoute;
+use App\Http\Controllers\Controller;
+use App\Models\DailyStat;
 use Illuminate\Http\Request;
 
-class DeliveryRouteController extends Controller
+class DailyStatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class DeliveryRouteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeliveryRoute $deliveryRoute)
+    public function show(DailyStat $dailyStat)
     {
         //
     }
@@ -42,7 +43,7 @@ class DeliveryRouteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeliveryRoute $deliveryRoute)
+    public function edit(DailyStat $dailyStat)
     {
         //
     }
@@ -50,7 +51,7 @@ class DeliveryRouteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DeliveryRoute $deliveryRoute)
+    public function update(Request $request, DailyStat $dailyStat)
     {
         //
     }
@@ -58,7 +59,7 @@ class DeliveryRouteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeliveryRoute $deliveryRoute)
+    public function destroy(DailyStat $dailyStat)
     {
         //
     }

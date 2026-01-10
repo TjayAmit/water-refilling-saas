@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ProjectBusinessManagement;
 
-use App\Models\SubscriptionPlan;
+use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use Illuminate\Http\Request;
 
-class SubscriptionPlanController extends Controller
+class AuditLogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class SubscriptionPlanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubscriptionPlan $subscriptionPlan)
+    public function show(AuditLog $auditLog)
     {
         //
     }
@@ -42,7 +43,7 @@ class SubscriptionPlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubscriptionPlan $subscriptionPlan)
+    public function edit(AuditLog $auditLog)
     {
         //
     }
@@ -50,7 +51,7 @@ class SubscriptionPlanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SubscriptionPlan $subscriptionPlan)
+    public function update(Request $request, AuditLog $auditLog)
     {
         //
     }
@@ -58,7 +59,7 @@ class SubscriptionPlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubscriptionPlan $subscriptionPlan)
+    public function destroy(AuditLog $auditLog)
     {
         //
     }
