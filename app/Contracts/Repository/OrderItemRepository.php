@@ -3,21 +3,27 @@
 namespace App\Contracts\Repository;
 
 use App\Contracts\OrderItemRepositoryInterface;
-use App\DTO\OrderItem;
+use App\DTO\OrderItemDTO;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Collection;
 
 class OrderItemRepository implements OrderItemRepositoryInterface
 {
+    public function getByOrderId(Order $order): Collection
+    {
+        return $order->orderItems;
+    }
+
     public function getTotalByOrderID(Order $order): float
     {
-        return OrderItem::where('order_id', $order->id)
+        return OrderItemDTO::where('order_id', $order->id)
             ->sum(fn($item) => $item->quantity * $item->price);
     }
 
-    public function create(OrderItem $dto): OrderItem
+    public function create(OrderItemDTO $dto): OrderItemDTO
     {
-        return OrderItem::create($dto->toArray());
+        return OrderItemDTO::create($dto->toArray());
     }
 
     public function createBulk(int $orderId, array $orderItems): Collection
@@ -29,22 +35,21 @@ class OrderItemRepository implements OrderItemRepositoryInterface
             $orderItem['updated_at'] = $now;
         }
 
-        return OrderItem::where('order_id', $orderId)->whereDate('created_at', $now)->get();
+        return OrderItemDTO::where('order_id', $orderId)->whereDate('created_at', $now)->get();
     }
 
-    public function update(OrderItem $dto, OrderItem $orderItem): OrderItem
+    public function update(Order $order, OrderItemDTO $dto): int
     {
-        $orderItem->update($dto->toArray());
-        return $orderItem;
+        return $order->update($dto->toArray());;
     }
 
-    public function delete(OrderItem $orderItem): int
+    public function delete(OrderItemDTO $orderItem): int
     {
         return $orderItem->delete();
     }
 
     public function deleteByOrderid(int $orderId): int
     {
-        return OrderItem::where('order_id', $orderId)->delete();
+        return OrderItemDTO::where('order_id', $orderId)->delete();
     }
 }

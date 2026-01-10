@@ -4,10 +4,12 @@ namespace App\Contracts\Repository;
 
 use App\Contracts\OrderRepositoryInterface;
 use App\DTO\OrderDTO;
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Ramsey\Collection\Collection;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -40,6 +42,11 @@ class OrderRepository implements OrderRepositoryInterface
     public function getOrderById(int $orderId): Order
     {
         return Order::find($orderId);
+    }
+
+    public function getOrderByStatus(OrderStatusEnum $status): Collection
+    {
+        return Order::where('status', $status)->get();
     }
 
     public function create(OrderDTO $dto): Order
