@@ -21,6 +21,13 @@ class OrderItemRepository implements OrderItemRepositoryInterface
             ->sum(fn($item) => $item->quantity * $item->price);
     }
 
+    public function getOrderItemsViaOrderDeliveryDate(string $orderDeliveryDate): Collection
+    {
+        return OrderItem::with('order', function($query) use ($orderDeliveryDate) {
+            return $query->whereData('delivery_date', $orderDeliveryDate);
+        })->get();
+    }
+
     public function create(OrderItemDTO $dto): OrderItemDTO
     {
         return OrderItemDTO::create($dto->toArray());
@@ -43,12 +50,12 @@ class OrderItemRepository implements OrderItemRepositoryInterface
         return $order->update($dto->toArray());;
     }
 
-    public function delete(OrderItemDTO $orderItem): int
+    public function delete(OrderItem $orderItem): int
     {
         return $orderItem->delete();
     }
 
-    public function deleteByOrderid(int $orderId): int
+    public function deleteByOrderId(int $orderId): int
     {
         return OrderItemDTO::where('order_id', $orderId)->delete();
     }

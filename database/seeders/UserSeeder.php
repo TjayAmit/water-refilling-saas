@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
 
         $super_admin->assignRole('super_admin');
 
+        // Owner
         $owner = User::create([
             'name' => 'Owner',
             'email' => 'owner@example.com',
@@ -27,5 +28,24 @@ class UserSeeder extends Seeder
         ]);
 
         $owner->assignRole('owner');
+
+        // Driver
+        $owner = User::create([
+            'name' => 'Driver',
+            'email' => 'driver@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $owner->assignRole('driver');
+
+        // Refiller
+
+        $owner = User::create([
+            'name' => 'Refiller',
+            'email' => 'refiller@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $owner->assignRole('refiller');
     }
 }

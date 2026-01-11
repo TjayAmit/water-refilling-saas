@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class StationProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of station products
      */
     public function index()
     {

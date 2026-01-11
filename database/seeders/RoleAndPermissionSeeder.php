@@ -15,24 +15,88 @@ class RoleAndPermissionSeeder extends Seeder
     {
         $super_admin = Role::create(['name' => 'super_admin']);
 
-        $permissions = [
-            'manage_users',
-            'manage_roles',
-            'manage_permissions',
-            'view_dashboard',
-            'view_settings',
-            'manage_settings',
+        $s_permissions = [
+            'read user',
+            'create user',
+            'edit user',
+            'delete user',
+            'read role',
+            'create role',
+            'edit role',
+            'delete role',
+            'create permission',
+            'edit permission',
+            'delete permission'.
+            'view dashboard',
+            'view settings',
+            'manage setting',
         ];
 
-        foreach ($permissions as $permission) {
+        foreach ($s_permissions as $permission) {
             $p = Permission::create(['name' => $permission]);
             $super_admin->givePermissionTo($p);
         }
 
-        $onwer = Role::create(['name' => 'owner']);
+        // Owner
+        $o_permissions = [
+            'read station',
+            'create station',
+            'edit station',
+            'delete station',
+            'read staff',
+            'create staff',
+            'edit staff',
+            'delete staff',
+            'read station product',
+            'create station product',
+            'edit station product',
+            'delete station product',
+            'read subscription',
+            'create subscription',
+            'edit subscription',
+            'read order',
+            'cancel order',
+            'delete order'
+        ];
 
-        $permission = Permission::create(['name' => 'manage_own_settings']);
+        $owner = Role::create(['name' => 'owner']);
 
-        $onwer->givePermissionTo($permission);
+        foreach ($o_permissions as $permission) {
+            $p = Permission::updateOrCreate(['name' => $permission], ['name' => $permission]);
+            $owner->givePermissionTo($p);
+        }
+
+        $owner->givePermissionTo($permission);
+
+        // Driver
+        $d_permissions = [
+            'read order',
+            'edit order',
+            'cancel order'
+        ];
+
+        $driver = Role::create(['name' => 'driver']);
+
+        foreach ($d_permissions as $permission) {
+            $p = Permission::updateOrCreate(['name' => $permission], ['name' => $permission]);
+            $driver->givePermissionTo($p);
+        }
+
+        $driver->givePermissionTo($permission);
+
+        // Refiller
+        $r_permissions = [
+            'read order',
+            'edit order'
+        ];
+
+        $refiller = Role::create(['name' => 'refiller']);
+
+        foreach ($r_permissions as $permission) {
+            $p = Permission::updateOrCreate(['name' => $permission], ['name' => $permission]);
+            $refiller->givePermissionTo($p);
+        }
+
+        $refiller->givePermissionTo($permission);
     }
 }

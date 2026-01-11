@@ -6,15 +6,13 @@ use App\Contracts\OrderRepositoryInterface;
 use App\DTO\OrderDTO;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Station;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Ramsey\Collection\Collection;
 
 class OrderRepository implements OrderRepositoryInterface
 {
-
     public function getAll(Request $request): LengthAwarePaginator
     {
         $search = $request->get('search');

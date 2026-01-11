@@ -9,17 +9,9 @@ use Illuminate\Http\Request;
 class StationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display list of station own by the user
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }

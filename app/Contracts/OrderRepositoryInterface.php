@@ -6,9 +6,9 @@ use App\DTO\OrderDTO;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\Station;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Ramsey\Collection\Collection;
 
 interface OrderRepositoryInterface
 {

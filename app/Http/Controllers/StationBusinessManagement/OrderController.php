@@ -15,14 +15,21 @@ class OrderController extends Controller
     public function __construct(
         protected OrderService $service
     ){}
+
     /**
-     * Display a listing of the resource.
+     * Display a list of order base parameters
+     * StationId
+     * OrderStatus
+     * User Role
      */
     public function index()
     {
         //
     }
 
+    /**
+     * Display list of order page
+     */
     public function create()
     {
         // Render the view
