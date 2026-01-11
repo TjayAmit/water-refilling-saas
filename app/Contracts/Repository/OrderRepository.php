@@ -7,6 +7,7 @@ use App\DTO\OrderDTO;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Station;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Ramsey\Collection\Collection;
@@ -44,9 +45,9 @@ class OrderRepository implements OrderRepositoryInterface
         return Order::find($orderId);
     }
 
-    public function getOrderByStatus(OrderStatusEnum $status): Collection
+    public function getOrderByStationIdAndStatus(Station $station,OrderStatusEnum $status): Collection
     {
-        return Order::where('status', $status)->get();
+        return $station->orders()->where('status', $status)->get();
     }
 
     public function create(OrderDTO $dto): Order

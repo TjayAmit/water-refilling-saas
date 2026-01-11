@@ -20,6 +20,11 @@ class OrderService
         protected OrderItemService $service
     ){}
 
+    public function getOrderByStationIdAndStatus(int $stationId, OrderStatusEnum $status = OrderStatusEnum::PENDING): Order
+    {
+        return $this->getOrderByStationIdAndStatus($stationId, $status);
+    }
+
     public function createDraftOrder(Request $request): Order
     {
         $orderDTO = OrderDTO::fromRequest($request);
