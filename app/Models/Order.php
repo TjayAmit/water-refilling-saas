@@ -9,7 +9,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Database\Factories\OrderFactory;
 use App\Enums\OrderStatusEnum;
+use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property integer id
+ * @property integer station_id
+ * @property integer customer_id
+ * @property string order_number
+ * @property string order_date
+ * @property float total_amount
+ * @property string payment_method
+ * @property OrderStatusEnum status
+ * @property string delivery_date
+ * @property Customer customer
+ */
 class Order extends Model
 {
     /** @use HasFactory<OrderFactory> */
