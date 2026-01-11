@@ -2,38 +2,30 @@
 
 namespace App\Http\Controllers\StationBusinessManagement;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Delivery;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
+    public function __construct(
+        protected OrderService $service
+    ){}
     /**
-     * Display a listing of the resource.
+     * Display list of to deliver
+     *
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return $this->service->getOrderByStationIdAndStatus($request);
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * View order to deliver
+     * Order details
+     * Delivery Route/Location
      */
     public function show(Delivery $delivery)
     {
@@ -41,25 +33,9 @@ class DeliveryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Delivery $delivery)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Update order status [Delivered/Cancelled]
      */
     public function update(Request $request, Delivery $delivery)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Delivery $delivery)
     {
         //
     }

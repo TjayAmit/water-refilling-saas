@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class StationUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing station staff
      */
     public function index()
     {

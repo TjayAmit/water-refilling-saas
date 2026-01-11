@@ -28,5 +28,24 @@ class UserSeeder extends Seeder
         ]);
 
         $owner->assignRole('owner');
+
+        // Driver
+        $owner = User::create([
+            'name' => 'Driver',
+            'email' => 'driver@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $owner->assignRole('driver');
+
+        // Refiller
+
+        $owner = User::create([
+            'name' => 'Refiller',
+            'email' => 'refiller@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $owner->assignRole('refiller');
     }
 }

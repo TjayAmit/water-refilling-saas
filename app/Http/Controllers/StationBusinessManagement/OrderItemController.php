@@ -4,63 +4,23 @@ namespace App\Http\Controllers\StationBusinessManagement;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderItem;
+use App\Services\OrderItemService;
 use Illuminate\Http\Request;
 
 class OrderItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    public function __construct(
+        protected OrderItemService $service
+    ){}
 
     /**
-     * Show the form for creating a new resource.
+     * Display list of order items by station id
+     *
+     * Total order items to deliver today
+     * Can be used for owner viewing summary of to deliver items
      */
-    public function create()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(OrderItem $orderItem)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(OrderItem $orderItem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, OrderItem $orderItem)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(OrderItem $orderItem)
-    {
-        //
+        return $this->service->getOrderItemsViaOrderDeliveryDate($request);
     }
 }
