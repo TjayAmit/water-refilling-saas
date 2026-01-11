@@ -53,7 +53,7 @@ class OutForDeliveryNotification extends Notification
             'order_id' => $this->order->id,
             'order_number' => $this->order->order_number,
             'total_amount' => $this->order->total_amount,
-            'message' => 'Order out for delivery.'
+            'message' => 'Order placed successfully'
         ];
     }
 }
