@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\StationBusinessManagement;
 
 use App\Http\Controllers\Controller;
-use App\Models\StationUser;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 
 class StationUserController extends Controller
@@ -35,7 +35,7 @@ class StationUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StationUser $stationUser)
+    public function show(Driver $stationUser)
     {
         //
     }
@@ -43,7 +43,7 @@ class StationUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StationUser $stationUser)
+    public function edit(Driver $stationUser)
     {
         //
     }
@@ -51,7 +51,7 @@ class StationUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StationUser $stationUser)
+    public function update(Request $request, Driver $stationUser)
     {
         //
     }
@@ -59,7 +59,7 @@ class StationUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StationUser $stationUser)
+    public function destroy(Driver $stationUser)
     {
         //
     }
