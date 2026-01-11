@@ -7,6 +7,7 @@ use App\Contracts\OrderRepositoryInterface;
 use App\DTO\OrderDTO;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
+use App\Notifications\OrderDeliveredNotification;
 use App\Notifications\OrderPlaceNotification;
 use App\Notifications\OutForDeliveryNotification;
 use Illuminate\Http\Request;
@@ -32,26 +33,15 @@ class OrderService
         return $order;
     }
 
-    public function placeOrder(Order $order): Order
+    public function updateOrderStatus(Order $order, OrderStatusEnum $status, ?string $notificationClass = null): Order
     {
         $orderDTO = OrderDTO::fromModel($order);
         $orderDTO->status = OrderStatusEnum::PENDING;
-
         $this->orderRepository->update($orderDTO, $order);
-        $user = $order->customer->user;
-        $user->notify(new OrderPlaceNotification($order));
 
-        return $order;
-    }
-
-    public function outOfDelivery(Order $order): Order
-    {
-        $orderDTO = OrderDTO::fromModel($order);
-        $orderDTO->status = OrderStatusEnum::OUT_FOR_DELIVERY;
-
-        $this->orderRepository->update($orderDTO, $order);
-        $user = $order->customer->user;
-        $user->notify(new OutForDeliveryNotification($order));
+        if ($notificationClass) {
+            $order->customer->user->notify(new $notificationClass($order));
+        }
 
         return $order;
     }
