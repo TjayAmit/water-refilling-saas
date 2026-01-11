@@ -1,38 +1,29 @@
 <?php
 
-namespace App\Filament\Owner\Resources\Stations\Schemas;
+namespace App\Filament\Owner\Resources\Drivers\Schemas;
 
 use App\Models\User;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rules\Unique;
 
-class StationForm
+class DriverForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Station Information')
+                Section::make('Account Information')
                     ->schema([
                         TextInput::make('name')
-                            ->required(),
-                        TextInput::make('address')
-                            ->required(),
-                        TextInput::make('latitude')
-                            ->numeric(),
-                        TextInput::make('longitude')
-                            ->numeric(),
-                        Select::make('status')
-                            ->options(['active' => 'Active', 'suspended' => 'Suspended'])
-                            ->default('active')
-                            ->required(),
-                    ]),
-                Section::make('Station Account')
-                    ->schema([
+                            ->label('Name')
+                            ->required()
+                            ->maxLength(255),
+
                         TextInput::make('email')
                             ->label('Email')
                             ->email()
@@ -42,6 +33,7 @@ class StationForm
                                 column: 'email',
                                 ignoreRecord: true,
                                 modifyRuleUsing: function (Unique $rule, callable $get, ?Model $record) {
+                                    // When editing, ignore the current driver's user email
                                     if ($record && $record->user) {
                                         return $rule->ignore($record->user->id, 'id');
                                     }
@@ -56,6 +48,25 @@ class StationForm
                             ->required(fn (string $context) => $context === 'create')
                             ->dehydrated(fn ($state) => filled($state))
                             ->minLength(8),
+                    ]),
+
+                Section::make('Driver Information')
+                    ->schema([
+                        Select::make('station_id')
+                            ->relationship('station', 'name')
+                            ->label('Station')
+                            ->required()
+                            ->searchable()
+                            ->preload(),
+
+                        TextInput::make('phone')
+                            ->tel()
+                            ->required()
+                            ->maxLength(255),
+
+                        Toggle::make('is_active')
+                            ->label('Active')
+                            ->default(true),
                     ]),
             ]);
     }

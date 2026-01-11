@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Owner\Resources\Users\Pages;
+namespace App\Filament\Owner\Resources\Drivers\Pages;
 
-use App\Filament\Owner\Resources\Users\UserResource;
+use App\Filament\Owner\Resources\Drivers\DriverResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListUsers extends ListRecords
+class ListDrivers extends ListRecords
 {
-    protected static string $resource = UserResource::class;
+    protected static string $resource = DriverResource::class;
 
     protected function getHeaderActions(): array
     {

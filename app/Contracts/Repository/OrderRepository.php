@@ -4,15 +4,14 @@ namespace App\Contracts\Repository;
 
 use App\Contracts\OrderRepositoryInterface;
 use App\DTO\OrderDTO;
-use App\Enums\OrderStatusEnum;
 use App\Models\Order;
-use App\Models\Station;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderRepository implements OrderRepositoryInterface
 {
+
     public function getAll(Request $request): LengthAwarePaginator
     {
         $search = $request->get('search');
@@ -41,11 +40,6 @@ class OrderRepository implements OrderRepositoryInterface
     public function getOrderById(int $orderId): Order
     {
         return Order::find($orderId);
-    }
-
-    public function getOrderByStationIdAndStatus(Station $station,OrderStatusEnum $status): Collection
-    {
-        return $station->orders()->where('status', $status)->get();
     }
 
     public function create(OrderDTO $dto): Order

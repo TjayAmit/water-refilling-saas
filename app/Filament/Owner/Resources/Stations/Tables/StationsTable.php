@@ -16,9 +16,8 @@ class StationsTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('owner_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('user.email')
+                    ->searchable(),
                 TextColumn::make('address')
                     ->searchable(),
                 TextColumn::make('latitude')
@@ -29,9 +28,6 @@ class StationsTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
-                TextColumn::make('subscription_plan_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property integer id
@@ -18,6 +19,7 @@ class Station extends Model
     protected $fillable = [
         'name',
         'owner_id',
+        'user_id',
         'address',
         'latitude',
         'longitude',
@@ -34,6 +36,11 @@ class Station extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
@@ -42,5 +49,15 @@ class Station extends Model
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function dailyStats(): HasMany
+    {
+        return $this->hasMany(DailyStat::class);
+    }
+
+    public function stationUsers(): HasMany
+    {
+        return $this->hasMany(Driver::class);
     }
 }

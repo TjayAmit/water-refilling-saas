@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Owner\Resources\Stations\Pages;
+namespace App\Filament\Owner\Resources\Drivers\Pages;
 
-use App\Filament\Owner\Resources\Stations\StationResource;
+use App\Filament\Owner\Resources\Drivers\DriverResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditStation extends EditRecord
+class EditDriver extends EditRecord
 {
-    protected static string $resource = StationResource::class;
+    protected static string $resource = DriverResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -20,6 +20,7 @@ class EditStation extends EditRecord
     protected function mutateFormDataBeforeFill(array $data): array
     {
         // Load user data
+        $data['name'] = $this->record->user->name;
         $data['email'] = $this->record->user->email;
 
         return $data;

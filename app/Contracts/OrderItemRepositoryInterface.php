@@ -2,19 +2,16 @@
 
 namespace App\Contracts;
 
-use App\DTO\OrderItemDTO;
+use App\DTO\OrderItem;
 use App\Models\Order;
-use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Collection;
 
 interface OrderItemRepositoryInterface
 {
-    public function getByOrderId(Order $order): Collection;
     public function getTotalByOrderID(Order $order): float;
-    public function getOrderItemsViaOrderDeliveryDate(string $orderDeliveryDate): Collection;
-    public function create(OrderItemDTO $dto): OrderItemDTO;
+    public function create(OrderItem $dto): OrderItem;
     public function createBulk(int $orderId, array $orderItems): Collection;
-    public function update(Order $order, OrderItemDTO $dto): int;
+    public function update(OrderItem $dto, OrderItem $orderItem): OrderItem;
     public function delete(OrderItem $orderItem): int;
-    public function deleteByOrderId(int $orderId): int;
+    public function deleteByOrderid(int $orderId): int;
 }

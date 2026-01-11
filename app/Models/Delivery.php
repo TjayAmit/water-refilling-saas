@@ -30,6 +30,6 @@ class Delivery extends Model
 
     public function driver(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'driver_id');
+        return $this->belongsTo(User::class);
     }
 }

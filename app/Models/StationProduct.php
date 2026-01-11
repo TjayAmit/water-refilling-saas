@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\StationProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StationProduct extends Model
 {
-    /** @use HasFactory<\Database\Factories\StationProductFactory> */
+    /** @use HasFactory<StationProductFactory> */
     use HasFactory;
     use SoftDeletes;
 

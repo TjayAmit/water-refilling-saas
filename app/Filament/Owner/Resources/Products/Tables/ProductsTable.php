@@ -20,7 +20,8 @@ class ProductsTable
                 TextColumn::make('id')
                     ->numeric()
                     ->sortable(),
-                ImageColumn::make('product.image'),
+                ImageColumn::make('product.image')
+                    ->label('Image'),
                 TextColumn::make('product.name')
                     ->searchable(),
                 TextColumn::make('price')

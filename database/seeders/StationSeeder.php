@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Driver;
 use App\Models\Station;
 use App\Models\StationProduct;
 use App\Models\User;
@@ -16,13 +17,23 @@ class StationSeeder extends Seeder
     {
         $owner = User::find(2);
 
+        // Refiller
+        $refiller = User::create([
+            'name' => 'Refiller',
+            'email' => 'refiller@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $refiller->assignRole('refiller');
+
         $station = Station::create([
             'name' => 'Station 1',
             'owner_id' => $owner->id,
+            'user_id' => $refiller->id,
             'address' => 'Address 1',
             'latitude' => '12.345678',
             'longitude' => '12.345678',
-            'status' => 'active'
+            'status' => 'active',
         ]);
 
         $station->subscriptions()->create([
@@ -49,6 +60,23 @@ class StationSeeder extends Seeder
             'is_active' => true,
             'quantity' => 0,
             'has_stock_limit' => false,
+        ]);
+
+        // Driver
+        $driver = User::create([
+            'name' => 'Driver',
+            'email' => 'driver@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $driver->assignRole('driver');
+
+        Driver::create([
+            'station_id' => $station->id,
+            'user_id' => $driver->id,
+            'is_active' => true,
+            'name' => $driver->name,
+            'phone' => '0123456789',
         ]);
     }
 }

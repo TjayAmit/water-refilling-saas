@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Filament\Owner\Resources\Stations\Pages;
+namespace App\Filament\Owner\Resources\Drivers\Pages;
 
-use App\Filament\Owner\Resources\Stations\StationResource;
+use App\Filament\Owner\Resources\Drivers\DriverResource;
 use App\Models\User;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateStation extends CreateRecord
+class CreateDriver extends CreateRecord
 {
-    protected static string $resource = StationResource::class;
+    protected static string $resource = DriverResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        // Create user
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => ($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
 
+        // Prepare driver data
         $data['user_id'] = $user->id;
-        $data['owner_id'] = auth()->user()->id;
-
         unset($data['email'], $data['password']);
 
         return $data;
