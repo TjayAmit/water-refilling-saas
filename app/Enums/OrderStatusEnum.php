@@ -6,7 +6,7 @@ enum OrderStatusEnum: string
 {
     case DRAFT = 'Draft';
     case PENDING = 'Pending';
-    case OUT_FOR_DELIVERY = 'Out for delivery';
+    case DELIVERY = 'Delivery';
     case DELIVERED = 'Delivered';
     case CANCELLED = 'Cancelled';
 
@@ -15,7 +15,7 @@ enum OrderStatusEnum: string
         return match($this) {
             self::DRAFT => 'Draft',
             self::PENDING => 'Pending',
-            self::OUT_FOR_DELIVERY => 'Out for Delivery',
+            self::DELIVERY => 'Delivery',
             self::DELIVERED => 'Delivered',
             self::CANCELLED => 'Cancelled',
         };
