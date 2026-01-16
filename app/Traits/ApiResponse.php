@@ -24,6 +24,10 @@ trait ApiResponse
                 'index' => response()->json($result, 200),
                 default => response()->json(['data' => $result, 'message' => "Retrieve list of orders."], 200),
             },
+            'StationProductController' => match($method) {
+                'index' => response()->json($result, 200),
+                default => response()->json(['data' => $result, 'message' => "Retrieve list of station products."], 200),
+            },
             default => response()->json($result, 200),
         };
     }

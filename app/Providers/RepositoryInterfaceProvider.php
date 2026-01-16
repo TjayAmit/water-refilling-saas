@@ -4,16 +4,17 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Contracts\{
-    OrderItemRepositoryInterface,
+use App\Contracts\{OrderItemRepositoryInterface,
     OrderRepositoryInterface,
-    StationRepositoryInterface
+    StationProductRepositoryInterface,
+    StationRepositoryInterface,
 };
 
 use App\Contracts\Repository\{
     OrderRepository,
     OrderItemRepository,
-    StationRepository
+    StationRepository,
+    StationProductRepository
 };
 
 class RepositoryInterfaceProvider extends ServiceProvider
@@ -26,6 +27,7 @@ class RepositoryInterfaceProvider extends ServiceProvider
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderItemRepositoryInterface::class, OrderItemRepository::class);
         $this->app->bind(StationRepositoryInterface::class, StationRepository::class);
+        $this->app->bind(StationProductRepositoryInterface::class, StationProductRepository::class);
     }
 
     /**

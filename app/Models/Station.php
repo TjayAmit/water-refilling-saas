@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
+use Database\Factories\StationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property integer id
  */
 class Station extends Model
 {
-    /** @use HasFactory<\Database\Factories\StationFactory> */
+    /** @use HasFactory<StationFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -43,7 +43,7 @@ class Station extends Model
 
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(StationProduct::class);
     }
 
     public function subscriptions(): HasMany
