@@ -13,6 +13,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface OrderRepositoryInterface
 {
     public function getAll(Request $request): LengthAwarePaginator;
+    public function getCustomerOrders(Request $request): LengthAwarePaginator;
     public function getOrderByStationId(Request $request, int $stationId): LengthAwarePaginator;
     public function getOrderById(int $orderId): Order;
     public function getOrderByStationIdAndStatus(Station $station, OrderStatusEnum $status): Collection;

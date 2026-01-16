@@ -21,7 +21,20 @@ class OrderRepository implements OrderRepositoryInterface
 
         return Order::when($search, function ($query) use ($search) {
             $query->where('order_id', 'LIKE', "%{$search}%");
-        })->paginate(limit: $limit, page: $page);
+        })->paginate(perPage: $limit, page: $page);
+    }
+
+    public function getCustomerOrders(Request $request): LengthAwarePaginator
+    {
+        $search = $request->get('search');
+        $limit = $request->get('limit') ?? 10;
+        $page = $request->get('page') ?? 1;
+
+        return Order::when($search, function ($query) use ($search) {
+                $query->where('order_number', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(perPage: $limit, page: $page);
     }
 
     public function getOrderByStationId(Request $request, int $stationId): LengthAwarePaginator
@@ -35,7 +48,7 @@ class OrderRepository implements OrderRepositoryInterface
                 $query->where('order_id', 'LIKE', "%{$search}%");
             })
             ->where('station_id', $stationId)
-            ->paginate(limit: $limit, page: $page);
+            ->paginate(perPage: $limit, page: $page);
     }
 
     public function getOrderById(int $orderId): Order
