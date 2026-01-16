@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\CustomerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property integer id
- * @property integer station_id
  * @property string name
  * @property string phone
  * @property float latitude
@@ -20,17 +20,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Customer extends Model
 {
-    /** @use HasFactory<\Database\Factories\CustomerFactory> */
+    /** @use HasFactory<CustomerFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'station_id',
         'name',
         'phone',
         'latitude',
         'longitude',
         'is_trusted',
-        'notes',
+        'user_id',
+        'address'
     ];
 
     protected $casts = [

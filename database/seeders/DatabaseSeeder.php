@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SubscriptionPlanSeeder::class,
             StationSeeder::class,
+            StationStaffSeeder::class,
         ]);
     }
 }

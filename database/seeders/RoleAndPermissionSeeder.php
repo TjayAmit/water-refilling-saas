@@ -26,7 +26,7 @@ class RoleAndPermissionSeeder extends Seeder
             'delete role',
             'create permission',
             'edit permission',
-            'delete permission'.
+            'delete permission' .
             'view dashboard',
             'view settings',
             'manage setting',
@@ -98,5 +98,22 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         $refiller->givePermissionTo($permission);
+
+        // Customer
+        $c_permissions = [
+            'read order',
+            'create order',
+            'update order',
+            'checkout order',
+            'cancel order'
+        ];
+
+        $customer = Role::create(['name' => 'customer']);
+
+        foreach ($c_permissions as $permission)
+        {
+            $p = Permission::updateOrCreate(['name' => $permission], ['name' => $permission]);
+            $customer->givePermissionTo($p);
+        }
     }
 }
