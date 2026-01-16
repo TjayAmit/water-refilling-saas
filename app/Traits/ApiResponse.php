@@ -22,6 +22,7 @@ trait ApiResponse
             },
             'OrderController' => match($method) {
                 'index' => response()->json($result, 200),
+                'store' => response()->json(['data' => $result, 'message' => "Your order has been place please prepare exact amount."], 201),
                 default => response()->json(['data' => $result, 'message' => "Retrieve list of orders."], 200),
             },
             'StationProductController' => match($method) {

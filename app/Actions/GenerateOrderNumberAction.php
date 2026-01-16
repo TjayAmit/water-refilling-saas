@@ -8,15 +8,15 @@ use Carbon\Carbon;
 
 class GenerateOrderNumberAction
 {
-    function execute(Station $station): string
+    public static function execute(int $stationId): string
     {
         $today = Carbon::today()->format('Ymd');
 
-        $count  = Order::where('station_id', $station->id)->whereDate('created_at', $today)->count();
+        $count  = Order::where('station_id', $stationId)->whereDate('created_at', $today)->count();
 
         $sequence = $count + 1;
         $sequencePadded = str_pad($sequence, 4, '0', STR_PAD_LEFT);
 
-        return "ORD-{$station->id}-{$today}-{$sequencePadded}";
+        return "ORD-{$stationId}-{$today}-{$sequencePadded}";
     }
 }

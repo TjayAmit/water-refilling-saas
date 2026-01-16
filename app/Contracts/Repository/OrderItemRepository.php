@@ -17,8 +17,9 @@ class OrderItemRepository implements OrderItemRepositoryInterface
 
     public function getTotalByOrderID(Order $order): float
     {
-        return OrderItemDTO::where('order_id', $order->id)
-            ->sum(fn($item) => $item->quantity * $item->price);
+        return (float) OrderItem::where('order_id', $order->id)
+            ->selectRaw('SUM(quantity * price) as total')
+            ->value('total') ?? 0.0;
     }
 
     public function getOrderItemsViaOrderDeliveryDate(string $orderDeliveryDate): Collection
@@ -42,7 +43,9 @@ class OrderItemRepository implements OrderItemRepositoryInterface
             $orderItem['updated_at'] = $now;
         }
 
-        return OrderItemDTO::where('order_id', $orderId)->whereDate('created_at', $now)->get();
+        OrderItem::insert($orderItems);
+
+        return OrderItem::where('order_id', $orderId)->whereDate('created_at', $now)->get();
     }
 
     public function update(Order $order, OrderItemDTO $dto): int

@@ -6,6 +6,7 @@ use App\Contracts\OrderItemRepositoryInterface;
 use App\DTO\OrderItemDTO;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\StationProduct;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,12 @@ class OrderItemService
         $orderItemsRequest = $request->input('order_items');
 
         foreach ($orderItemsRequest as $orderItem) {
-            $orderItems[] = OrderItemDTO::fromArray($orderItem);
+            $product = StationProduct::find($orderItem['product_id']);
+            $orderItem['price'] = $product->price;
+            $orderItem['quantity'] = $orderItem['quantity'] ?? 1;
+            $orderItem['order_id'] = $orderId;
+
+            $orderItems[] = OrderItemDTO::fromArray($orderItem)->toArray();
         }
 
         return $this->orderItemRepository->createBulk($orderId, $orderItems);

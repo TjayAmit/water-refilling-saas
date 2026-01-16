@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 class OrderDTO
 {
     public function __construct(
-        public ?int $orderId = null,
         public int $stationId,
         public int $customerId,
+        public string $deliveryDate,
+        public ?int $orderId = null,
         public ?string $orderNumber = null,
         public float $totalAmount = 0.0,
         public string $paymentMethod = 'cash',
         public OrderStatusEnum $status = OrderStatusEnum::PENDING,
-        public string $deliveryDate
     ){}
 
     public static function fromRequest(Request $request): self
@@ -33,14 +33,14 @@ class OrderDTO
     public static function fromModel(Order $order): self
     {
         return new self(
-            $orderId = $order->id,
             stationId: $order->station_id,
             customerId: $order->customer_id,
+            deliveryDate: $order->delivery_date,
+            orderId: $order->id,
             orderNumber: $order->order_number,
             totalAmount: $order->total_amount,
             paymentMethod: $order->payment_method,
             status: $order->status,
-            deliveryDate: $order->delivery_date
         );
     }
 

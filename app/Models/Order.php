@@ -32,7 +32,6 @@ class Order extends Model
         'station_id',
         'customer_id',
         'order_number',
-        'order_date',
         'total_amount',
         'payment_method',
         'status',

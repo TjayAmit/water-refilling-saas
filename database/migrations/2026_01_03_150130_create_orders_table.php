@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('station_id')->constrained()->onDelete('cascade');
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->string('order_number');
-            $table->date('order_date');
             $table->decimal('total_amount', 10, 2);
             $table->string('payment_method');
             $table->enum('status', OrderStatusEnum::cases())->default(OrderStatusEnum::PENDING);

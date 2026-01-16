@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Actions\GenerateOrderNumberAction;
 use App\Contracts\OrderItemRepositoryInterface;
 use App\Contracts\OrderRepositoryInterface;
 use App\DTO\OrderDTO;
@@ -35,7 +36,10 @@ class OrderService
 
     public function createDraftOrder(Request $request): Order
     {
+        $stationId = $request->input('station_id');
         $orderDTO = OrderDTO::fromRequest($request);
+        $orderDTO->orderNumber = GenerateOrderNumberAction::execute($stationId);
+
         $order = $this->orderRepository->create($orderDTO);
 
         $this->service->createOrderItems($order->id, $request);
