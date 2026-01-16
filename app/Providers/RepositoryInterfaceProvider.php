@@ -6,12 +6,14 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Contracts\{
     OrderItemRepositoryInterface,
-    OrderRepositoryInterface
+    OrderRepositoryInterface,
+    StationRepositoryInterface
 };
 
 use App\Contracts\Repository\{
     OrderRepository,
-    OrderItemRepository
+    OrderItemRepository,
+    StationRepository
 };
 
 class RepositoryInterfaceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class RepositoryInterfaceProvider extends ServiceProvider
     {
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderItemRepositoryInterface::class, OrderItemRepository::class);
+        $this->app->bind(StationRepositoryInterface::class, StationRepository::class);
     }
 
     /**
