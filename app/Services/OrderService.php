@@ -9,6 +9,7 @@ use App\DTO\OrderDTO;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Station;
 use App\Notifications\OrderDeliveredNotification;
 use App\Notifications\OrderPlaceNotification;
 use App\Notifications\OutForDeliveryNotification;
@@ -23,15 +24,13 @@ class OrderService
         protected OrderItemService $service
     ){}
 
-    public function getOrderByStationIdAndStatus(Request $request): Collection
+    public function getOrderByStationIdAndStatus(Station $station, $request): Collection
     {
-        $stationId = $request->input('station_id');
-
         $status = OrderStatusEnum::tryFrom(
-            strtoupper($request->input('status', 'draft'))
+            strtoupper($request->input('status', 'Draft'))
         ) ?? OrderStatusEnum::DRAFT;
 
-        return $this->orderRepository->getOrderByStationIdAndStatus($stationId, $status);
+        return $this->orderRepository->getOrderByStationIdAndStatus($station, $status);
     }
 
     public function createDraftOrder(Request $request): Order

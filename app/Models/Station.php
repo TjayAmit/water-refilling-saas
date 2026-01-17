@@ -51,6 +51,11 @@ class Station extends Model
         return $this->hasMany(Subscription::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function dailyStats(): HasMany
     {
         return $this->hasMany(DailyStat::class);

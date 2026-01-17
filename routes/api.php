@@ -3,18 +3,23 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RestApis\{
+    CustomerOrderController,
     OrderController,
+    NotificationController,
     StationController,
     StationProductController,
-    CustomerOrderController
+    StationOrderController
 };
 
 Route::prefix('v1')->group(function () {
-    Route::get('orders', [OrderController::class, 'index']);
-    Route::post('orders', [OrderController::class, 'store']);
-    Route::put('orders/{order}/place-order', [OrderController::class, 'placeOrder']);
-    Route::put('orders/{order}/place-out-for-delivery', [OrderController::class, 'placeOutForDelivery']);
-    Route::put('orders/{order}/delivered', [OrderController::class, 'setDelivered']);
+    // Orders
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index']);
+        Route::post('/', [OrderController::class, 'store']);
+        Route::patch('{order}/place', [OrderController::class, 'place']);
+        Route::patch('{order}/out_for_delivery', [OrderController::class, 'outForDelivery']);
+        Route::patch('{order}/complete', [OrderController::class, 'complete']);
+    });
 
     // Customer Orders
     Route::get('customer-orders', [CustomerOrderController::class, 'index']);
@@ -25,4 +30,14 @@ Route::prefix('v1')->group(function () {
     // Station Products
     Route::get('stations/{station}/products', [StationProductController::class, 'index']);
 
+    // Station Orders
+    Route::get('stations/{station}/orders', [StationOrderController::class, 'index']);
+
+    // Notifications
+    Route::prefix('notifications')->group(function () {
+        Route::get('/', [NotificationController::class, 'index']);
+        Route::get('unread-count', [NotificationController::class, 'unreadCount']);
+        Route::patch('{notification}/read', [NotificationController::class, 'markAsRead']);
+        Route::post('read-all', [NotificationController::class, 'markAllAsRead']);
+    });
 });

@@ -16,7 +16,7 @@ class OrderDTO
         public ?string $orderNumber = null,
         public float $totalAmount = 0.0,
         public string $paymentMethod = 'cash',
-        public OrderStatusEnum $status = OrderStatusEnum::PENDING,
+        public OrderStatusEnum $status = OrderStatusEnum::DRAFT,
     ){}
 
     public static function fromRequest(Request $request): self

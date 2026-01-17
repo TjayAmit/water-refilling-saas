@@ -15,13 +15,21 @@ class OrderRepository implements OrderRepositoryInterface
 {
     public function getAll(Request $request): LengthAwarePaginator
     {
+        $user = $request->user();
         $search = $request->get('search');
         $limit = $request->get('limit') ?? 10;
         $page = $request->get('page') ?? 1;
 
-        return Order::when($search, function ($query) use ($search) {
-            $query->where('order_id', 'LIKE', "%{$search}%");
-        })->paginate(perPage: $limit, page: $page);
+        return Order::when($user->hasRole('refiller'), function ($query) {
+                $query->where('status', OrderStatusEnum::PENDING);
+            })
+            ->when($user->hasRole('driver'), function ($query) {
+                $query->where('status', OrderStatusEnum::OUT_FOR_DELIVERY);
+            })
+            ->when($search, function ($query) use ($search) {
+                $query->where('order_id', 'LIKE', "%{$search}%");
+            })
+            ->paginate(perPage: $limit, page: $page);
     }
 
     public function getCustomerOrders(Request $request): LengthAwarePaginator

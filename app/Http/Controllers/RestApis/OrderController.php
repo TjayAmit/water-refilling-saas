@@ -34,17 +34,17 @@ class OrderController extends Controller
         return response()->json(['data' => $this->service->createDraftOrder($request)], 201);
     }
 
-    public function placeOrder(Order $order, Request $request): JsonResponse
+    public function place(Order $order, Request $request): JsonResponse
     {
         return response()->json(['data' => $this->service->updateOrderStatus($order, OrderStatusEnum::PENDING, OrderPlaceNotification::class)]);
     }
 
-    public function placeOutForDelivery(Order $order, Request $request): JsonResponse
+    public function outForDelivery(Order $order, Request $request): JsonResponse
     {
         return response()->json(['data' => $this->service->updateOrderStatus($order, OrderStatusEnum::OUT_FOR_DELIVERY, OrderPlaceNotification::class)]);
     }
 
-    public function setDelivered(Order $order, Request $request): JsonResponse
+    public function complete(Order $order, Request $request): JsonResponse
     {
         return response()->json(['data' => $this->service->updateOrderStatus($order, OrderStatusEnum::DELIVERED, OrderPlaceNotification::class)]);
     }
