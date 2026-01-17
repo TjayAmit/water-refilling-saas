@@ -3,6 +3,7 @@
 namespace App\DTO;
 
 use App\Enums\OrderStatusEnum;
+use App\Enums\PaymentMethodEnum;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,10 @@ class OrderDTO
         public ?int $orderId = null,
         public ?string $orderNumber = null,
         public float $totalAmount = 0.0,
-        public string $paymentMethod = 'cash',
+        public PaymentMethodEnum $paymentMethod = PaymentMethodEnum::CASH,
         public OrderStatusEnum $status = OrderStatusEnum::DRAFT,
+        public float $latitude = 0.0,
+        public float $longitude = 0.0
     ){}
 
     public static function fromRequest(Request $request): self
@@ -26,7 +29,9 @@ class OrderDTO
             customerId: $request->input('customer_id'),
             deliveryDate: $request->input('delivery_date')
             ?? now()->addDays(3)->toDateString()
-            ?? now()->toDateString()
+            ?? now()->toDateString(),
+            latitude: $request->input('latitude'),
+            longitude: $request->input('longitude'),
         );
     }
 
@@ -41,6 +46,8 @@ class OrderDTO
             totalAmount: $order->total_amount,
             paymentMethod: $order->payment_method,
             status: $order->status,
+            latitude: $order->latitude,
+            longitude: $order->longitude
         );
     }
 
@@ -54,6 +61,8 @@ class OrderDTO
             'payment_method' => $this->paymentMethod,
             'status' => $this->status,
             'delivery_date' => $this->deliveryDate,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude
         ];
     }
 }

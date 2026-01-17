@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             RoleAndPermissionSeeder::class,
             ProductSeeder::class,
             UserSeeder::class,
-            SubscriptionPlanSeeder::class,
             StationSeeder::class,
             StationStaffSeeder::class,
         ]);

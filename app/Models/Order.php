@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethodEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Database\Factories\OrderFactory;
 use App\Enums\OrderStatusEnum;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * @property integer id
@@ -18,9 +18,11 @@ use Illuminate\Notifications\Notifiable;
  * @property string order_number
  * @property string order_date
  * @property float total_amount
- * @property string payment_method
+ * @property PaymentMethodEnum payment_method
  * @property OrderStatusEnum status
  * @property string delivery_date
+ * @property float latitude
+ * @property float longitude
  * @property Customer customer
  */
 class Order extends Model
@@ -36,13 +38,16 @@ class Order extends Model
         'payment_method',
         'status',
         'delivery_date',
+        'latitude',
+        'longitude'
     ];
 
     protected $casts = [
         'order_date' => 'date',
         'delivery_date' => 'date',
         'total_amount' => 'decimal:2',
-        'status' => OrderStatusEnum::class
+        'payment_method' => PaymentMethodEnum::class,
+        'status' => OrderStatusEnum::class,
     ];
 
     public function station(): BelongsTo
