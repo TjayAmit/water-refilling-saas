@@ -27,8 +27,8 @@ class OrderService
     public function getOrderByStationIdAndStatus(Station $station, $request): Collection
     {
         $status = OrderStatusEnum::tryFrom(
-            strtoupper($request->input('status', 'Draft'))
-        ) ?? OrderStatusEnum::DRAFT;
+            strtoupper($request->input('status', 'Pending'))
+        ) ?? OrderStatusEnum::PENDING;
 
         return $this->orderRepository->getOrderByStationIdAndStatus($station, $status);
     }
