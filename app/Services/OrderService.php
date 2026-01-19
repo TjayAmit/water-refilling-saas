@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Actions\GenerateOrderNumberAction;
+use App\Contracts\CustomerRepositoryInterface;
 use App\Contracts\OrderItemRepositoryInterface;
 use App\Contracts\OrderRepositoryInterface;
 use App\DTO\OrderDTO;
@@ -21,6 +22,7 @@ class OrderService
     public function __construct(
         protected OrderRepositoryInterface $orderRepository,
         protected OrderItemRepositoryInterface $orderItemRepository,
+        protected CustomerRepositoryInterface $customerRepository,
         protected OrderItemService $service
     ){}
 
@@ -33,11 +35,14 @@ class OrderService
         return $this->orderRepository->getOrderByStationIdAndStatus($station, $status);
     }
 
-    public function createDraftOrder(Request $request): Order
+    public function create(Request $request): Order
     {
         $stationId = $request->input('station_id');
         $orderDTO = OrderDTO::fromRequest($request);
         $orderDTO->orderNumber = GenerateOrderNumberAction::execute($stationId);
+
+        $customer = $this->customerRepository->create($orderDTO->customerDTO);
+        $orderDTO->customerId = $customer->id;
 
         $order = $this->orderRepository->create($orderDTO);
 
@@ -56,7 +61,7 @@ class OrderService
         $this->orderRepository->update($orderDTO, $order);
 
         if ($notificationClass) {
-            $order->customer->user->notify(new $notificationClass($order));
+            $order->customer->notify(new $notificationClass($order));
         }
 
         return $order;

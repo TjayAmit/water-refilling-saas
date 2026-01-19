@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\CustomerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -18,7 +19,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Customer extends Model
 {
     /** @use HasFactory<CustomerFactory> */
-    use HasFactory, HasRoles;
+    use HasFactory, HasRoles, Notifiable;
 
     protected $fillable = [
         'name',
@@ -33,4 +34,11 @@ class Customer extends Model
         'longitude' => 'decimal:8',
         'is_trusted' => 'boolean',
     ];
+
+    public function routeNotificationForWebHook($notification)
+    {
+        return $this->platform_webhook_url;
+    }
+
+
 }

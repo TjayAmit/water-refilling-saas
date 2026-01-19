@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Actions\CustomerPlatformChannel;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -26,9 +27,23 @@ class OrderPlaceNotification extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via($notifiable): array
     {
-        return ['mail', 'database'];
+        return [
+            'mail',
+            'database',
+            CustomerPlatformChannel::class
+        ];
+    }
+
+    public function toCustomerPlatform($notifiable): array
+    {
+        return [
+            'order_id' => $this->order->id,
+            'order_number' => $this->order->order_number,
+            'total_amount' => $this->order->total_amount,
+            'message' => 'Order placed successfully'
+        ];
     }
 
     /**
