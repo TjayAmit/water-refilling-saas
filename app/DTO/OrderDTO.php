@@ -19,7 +19,8 @@ class OrderDTO
         public PaymentMethodEnum $paymentMethod = PaymentMethodEnum::CASH,
         public OrderStatusEnum $status = OrderStatusEnum::DRAFT,
         public float $latitude = 0.0,
-        public float $longitude = 0.0
+        public float $longitude = 0.0,
+        public CustomerDTO $customerDTO
     ){}
 
     public static function fromRequest(Request $request): self
@@ -32,6 +33,7 @@ class OrderDTO
             ?? now()->toDateString(),
             latitude: $request->input('latitude'),
             longitude: $request->input('longitude'),
+            customerDTO: CustomerDTO::fromRequest($request)
         );
     }
 
@@ -47,7 +49,8 @@ class OrderDTO
             paymentMethod: $order->payment_method,
             status: $order->status,
             latitude: $order->latitude,
-            longitude: $order->longitude
+            longitude: $order->longitude,
+            customerDTO: CustomerDTO::fromModel($order->customer)
         );
     }
 
@@ -62,7 +65,8 @@ class OrderDTO
             'status' => $this->status,
             'delivery_date' => $this->deliveryDate,
             'latitude' => $this->latitude,
-            'longitude' => $this->longitude
+            'longitude' => $this->longitude,
+            'customer' => $this->customerDTO->toArray(),
         ];
     }
 }

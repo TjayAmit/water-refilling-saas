@@ -45,3 +45,27 @@ Route::middleware('auth:sanctum')->group(function () {
         });
     });
 });
+
+/**
+ * Third Party entry for Customer Platform
+ *
+ * 1. Customer must be able to view station products
+ * 2. Customer must be able to place orders
+ * 3. Customer must be able to cancel order
+ */
+Route::prefix('v1/external')->group(function () {
+    // Orders
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index']);
+        Route::post('/', [OrderController::class, 'store']);
+        Route::patch('{order}/place', [OrderController::class, 'place']);
+        Route::patch('{order}/out_for_delivery', [OrderController::class, 'outForDelivery']);
+        Route::patch('{order}/complete', [OrderController::class, 'complete']);
+    });
+
+    // Station Products
+    Route::get('stations/{station}/products', [StationProductController::class, 'index']);
+
+    // Station Orders
+    Route::get('stations/{station}/orders', [StationOrderController::class, 'index']);
+});

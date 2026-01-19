@@ -13,7 +13,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string phone
  * @property boolean is_trusted
  * @property string notes
- * @property Station station
  * @property User user
  */
 class Customer extends Model
