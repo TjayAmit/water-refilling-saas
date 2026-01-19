@@ -22,7 +22,7 @@ class StationStaffSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        $driver->assignRole('driver', 'web');
+        $driver->assignRole('driver');
 
         Driver::create([
             'name' => 'Johny Doe',
@@ -39,7 +39,7 @@ class StationStaffSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        $refiller->assignRole('refiller', 'web');
+        $refiller->assignRole('refiller');
 
         $station = Station::find(1);
 

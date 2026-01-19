@@ -29,15 +29,5 @@ class UserSeeder extends Seeder
         ]);
 
         $owner->assignRole('owner');
-
-        $customer = Customer::create([
-            'name' => 'John Doe',
-            'phone' => '0123456789',
-            'email' => 'customer@example.com',
-            'address' => 'Address',
-            'is_trusted' => true
-        ]);
-
-        $customer->assignRole('customer', 'web');
     }
 }

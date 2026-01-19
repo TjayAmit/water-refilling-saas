@@ -36,14 +36,6 @@ class StationSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        $station->subscriptions()->create([
-            'plan_id' => 1,
-            'starts_at' => now(),
-            'ends_at' => now()->addDays(30),
-            'status' => 'paid',
-            'last_payment_at' => null,
-        ]);
-
         StationProduct::create([
             'station_id' => $station->id,
             'product_id' => 1,
