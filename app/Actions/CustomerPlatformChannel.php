@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Http;
 
 class CustomerPlatformChannel
 {
-    public function execute($notifiable, Notification $notification)
+    public static function execute($notifiable, Notification $notification): bool
     {
-        if (method_exists($notifiable, 'routeNotificationForWebHook')) {
-            $data = $notifiable->routeNotificationForWebHook($notification);
+        if (method_exists($notifiable, 'toCustomerPlatform')) {
+            $data = $notifiable->toCustomerPlatform($notification);
 
-            Http::post($notifiable->platform_webhook_url, $data);
+            $result = Http::post($notifiable->platform_webhook_url, $data);
+
+            if ($result->successful()) {
+                return true;
+            }
         }
+
+        return false;
     }
 }
