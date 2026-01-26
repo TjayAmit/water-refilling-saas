@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Droplets, Eye, EyeOff } from 'lucide-react';
+import { router } from '@inertiajs/react';
 
 
 export default function Login({
@@ -17,18 +18,23 @@ export default function Login({
         remember: false,
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: Event) => {
         e.preventDefault();
-        setProcessing(true);
-        // Simulate form submission
-        setTimeout(() => {
-            setProcessing(false);
-            console.log('Login submitted:', formData);
-        }, 1000);
+
+        router.post('/login', formData, {
+            onStart: () => setProcessing(true),
+            onSuccess: () => setProcessing(false),
+            onError: (errors) => setErrors(errors),
+        });
     };
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const {
+            name,
+            value,
+            type
+        } = e.target;
+
         setFormData(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value
